@@ -6,6 +6,7 @@ import org.kymjs.blog.R;
 import org.kymjs.blog.domain.Tweet;
 import org.kymjs.blog.ui.widget.CollapsibleTextView;
 import org.kymjs.blog.utils.UIHelper;
+import org.kymjs.emoji.helper.InputHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
 import org.kymjs.kjframe.widget.AdapterHolder;
@@ -43,7 +44,8 @@ public class TweetAdapter extends KJAdapter<Tweet> {
         helper.setText(R.id.msg_item_text_uname, item.getAuthor());
         CollapsibleTextView content = helper
                 .getView(R.id.msg_item_text_content);
-        content.setText(item.getBody());
+        content.setText(InputHelper.displayEmoji(content.getResources(),
+                item.getBody(), "[", "]"));
 
         helper.setText(R.id.msg_item_text_time,
                 StringUtils.friendlyTime(item.getPubDate()));

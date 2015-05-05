@@ -15,6 +15,7 @@ APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://ww
 * *KJFrameForAndroid* ：[https://github.com/kymjs/KJFrameForAndroid](https://github.com/kymjs/KJFrameForAndroid)<br>
 * *KJPush* ：[http://git.oschina.net/kymjs/KJPush](http://git.oschina.net/kymjs/KJPush)<br>
 * *NineOldAndroids* ：[https://github.com/JakeWharton/NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)<br>
+* *KJEmoji* ：[http://git.oschina.net/kymjs/KJEmoji](http://git.oschina.net/kymjs/KJEmoji)<br>
 
 启动Eclipse，点击菜单并导入Android客户端项目，请确保你当前的Android SDK是最新版。<br>
 如果编译出错，请修改项目根目录下的 project.properties 文件。<br>
