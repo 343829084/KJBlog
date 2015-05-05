@@ -2,7 +2,7 @@ package org.kymjs.blog.ui;
 
 import org.kymjs.blog.AppContext;
 import org.kymjs.blog.R;
-import org.kymjs.blog.service.UpdateService;
+import org.kymjs.blog.service.CommonService;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.utils.DensityUtils;
 import org.kymjs.kjframe.utils.PreferenceHelper;
@@ -58,7 +58,7 @@ public class AppStart extends KJActivity {
     }
 
     private void jumpTo() {
-        startService(new Intent(aty, UpdateService.class));
+        startService(new Intent(aty, CommonService.class));
         configPush();
         boolean isFirst = PreferenceHelper.readBoolean(aty, TAG, "first_open",
                 true);

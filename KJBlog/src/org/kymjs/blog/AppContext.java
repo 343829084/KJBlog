@@ -19,5 +19,6 @@ public class AppContext extends Application {
         super.onCreate();
         BitmapConfig.CACHEPATH = AppConfig.imgCachePath;
         HttpConfig.CACHEPATH = AppConfig.httpCachePath;
+        CrashHandler.create(this);
     }
 }

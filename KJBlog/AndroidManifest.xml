@@ -47,7 +47,7 @@
             android:name="org.kymjs.blog.ui.ImageActivity"
             android:theme="@android:style/Theme.NoTitleBar" />
 
-        <service android:name="org.kymjs.blog.service.UpdateService"/>
+        <service android:name="org.kymjs.blog.service.CommonService"/>
         
         <!-- KJPush，一个广播一个Service -->
 

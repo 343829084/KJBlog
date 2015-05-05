@@ -4,7 +4,7 @@ import java.io.File;
 
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
-import org.kymjs.blog.service.UpdateService;
+import org.kymjs.blog.service.CommonService;
 import org.kymjs.blog.ui.TitleBarActivity;
 import org.kymjs.blog.ui.widget.KJScrollView;
 import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;

@@ -1,9 +1,16 @@
 package org.kymjs.blog.service;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import org.kymjs.blog.AppConfig;
+import org.kymjs.blog.CrashHandler;
+import org.kymjs.blog.utils.MailSenderInfo;
 import org.kymjs.blog.utils.Parser;
+import org.kymjs.blog.utils.SimpleMailSender;
 import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
@@ -18,12 +25,17 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
-public class UpdateService extends IntentService {
+/**
+ * 做一些全局的信息处理，检查更新，日志上传
+ * 
+ * @author kymjs
+ */
+public class CommonService extends IntentService {
 
     private final KJHttp kjh;
 
-    public UpdateService() {
-        super("UpdateService");
+    public CommonService() {
+        super("CommonService");
         HttpConfig config = new HttpConfig();
         config.cacheTime = 0;
         kjh = new KJHttp(config);
@@ -50,10 +62,32 @@ public class UpdateService extends IntentService {
                 checkVersion(t);
             }
         });
+        File crashLogFile = FileUtils.getSaveFile(AppConfig.saveFolder,
+                CrashHandler.FILE_NAME_SUFFIX);
+        if (crashLogFile != null && crashLogFile.exists()) {
+            StringBuilder sb = new StringBuilder();
+            BufferedReader bfr = null;
+            try {
+                bfr = new BufferedReader(new FileReader(crashLogFile));
+                String line = null;
+                do {
+                    line = bfr.readLine();
+                    sb.append(line).append("\n");
+                } while (line != null);
+            } catch (FileNotFoundException e) {
+            } catch (IOException e) {
+            } finally {
+                FileUtils.closeIO(bfr);
+            }
+            crashLogFile.delete();
+            if (sb.length() > 30) {
+                uploadCrashLog(sb.toString());
+            }
+        }
     }
 
     private void checkVersion(String json) {
-        final String url = Parser.checkVersion(UpdateService.this, json);
+        final String url = Parser.checkVersion(CommonService.this, json);
         if (!StringUtils.isEmpty(url) && SystemTool.isWiFi(this)) {
             download(url);
         }
@@ -81,9 +115,30 @@ public class UpdateService extends IntentService {
             @Override
             public void onSuccess(byte[] t) {
                 super.onSuccess(t);
-                SystemTool.installApk(UpdateService.this, new File(folder
+                SystemTool.installApk(CommonService.this, new File(folder
                         + "/kjblog.apk"));
             }
         });
+    }
+
+    private void uploadCrashLog(String info) {
+        try {
+            MailSenderInfo mailInfo = new MailSenderInfo();
+            mailInfo.setMailServerHost("smtp.qq.com");
+            mailInfo.setMailServerPort("25");
+            mailInfo.setValidate(true);
+            mailInfo.setUserName("1182954373@qq.com");
+            mailInfo.setPassword("kjblog123");
+            mailInfo.setFromAddress("1182954373@qq.com");
+            mailInfo.setToAddress("766136833@qq.com");
+            mailInfo.setSubject("错误日志");
+            mailInfo.setContent(info);
+
+            // 这个类主要来发送邮件
+            SimpleMailSender sms = new SimpleMailSender();
+            sms.sendTextMail(mailInfo);// 发送文体格式
+            // sms.sendHtmlMail(mailInfo);//发送html格式
+        } catch (Exception e) {
+        }
     }
 }
