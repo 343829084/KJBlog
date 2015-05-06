@@ -41,14 +41,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:drawableTop="@drawable/icon"
+                android:drawableTop="@drawable/ic_tandong_android"
                 android:gravity="center"
-                android:text="开源实验室" />
+                android:text="手机学Android" />
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/mine_rl_push"
-            style="@style/mine_item_style" >
+            style="@style/mine_item_style"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/mine_tv_push"

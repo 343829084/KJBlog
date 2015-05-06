@@ -6,6 +6,7 @@ import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.http.KJAsyncTask;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.ViewInject;
@@ -94,7 +95,7 @@ public class MineFragment extends TitleBarFragment {
             SimpleBackActivity.postShowWith(outsideAty, SimpleBackPage.COLLECT);
             break;
         case R.id.mine_tv_other:
-            doJoin("http://www.kymjs.com/");
+            UIHelper.toBrowser(outsideAty, "http://www.aplesson.com/MtAndroid/");
             break;
         case R.id.mine_tv_join:
             doJoin("http://jq.qq.com/?_wv=1027&k=XblWhv");
@@ -114,7 +115,7 @@ public class MineFragment extends TitleBarFragment {
                     deleteFile(folder);
                 }
             });
-            ViewInject.toast("缓存正在清除");
+            ViewInject.toast("缓存正在后台清除");
             break;
         case R.id.mine_rl_feedback:
             doJoin("http://jq.qq.com/?_wv=1027&k=XblWhv");

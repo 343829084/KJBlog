@@ -1,9 +1,9 @@
 package org.kymjs.blog.adapter;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.kymjs.blog.R;
-import org.kymjs.blog.domain.Blog;
+import org.kymjs.blog.domain.KymJSBlogEntity;
 import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -15,25 +15,21 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 
-/**
- * 主界面博客模块列表适配器
- * 
- * @author kymjs (https://github.com/kymjs)
- * @since 2015-3
- */
-public class BlogAdapter extends KJAdapter<Blog> {
+public class NewBlogAdapter extends KJAdapter<KymJSBlogEntity> {
+
     private final KJBitmap kjb = new KJBitmap();
 
-    public BlogAdapter(AbsListView view, List<Blog> mDatas, int itemLayoutId) {
+    public NewBlogAdapter(AbsListView view, Collection<KymJSBlogEntity> mDatas,
+            int itemLayoutId) {
         super(view, mDatas, itemLayoutId);
     }
 
     @Override
-    public void convert(AdapterHolder helper, Blog item, boolean isScrolling) {
-        helper.getView(R.id.item_blog_tip_recommend).setVisibility(
-                item.getIsRecommend() == 0 ? View.GONE : View.VISIBLE);
-        helper.getView(R.id.item_blog_tip_tody).setVisibility(
-                item.getIsAuthor() == 0 ? View.GONE : View.VISIBLE);
+    public void convert(AdapterHolder helper, KymJSBlogEntity item,
+            boolean isScrolling) {
+
+        helper.getView(R.id.item_blog_tip_recommend).setVisibility(View.GONE);
+        helper.getView(R.id.item_blog_tip_tody).setVisibility(View.VISIBLE);
         ImageView image = helper.getView(R.id.item_blog_img);
         String url = item.getImageUrl();
         if (StringUtils.isEmpty(url)) {
@@ -50,8 +46,7 @@ public class BlogAdapter extends KJAdapter<Blog> {
         helper.setText(R.id.item_blog_tv_title, item.getTitle());
         helper.setText(R.id.item_blog_tv_description, item.getDescription());
         helper.setText(R.id.item_blog_tv_author, "张涛");
-        helper.setText(R.id.item_blog_tv_date,
-                StringUtils.friendlyTime(item.getDate()));
+        helper.setText(R.id.item_blog_tv_date, item.getPublished());
     }
 
     private void onPicClick(View view, final String url) {
@@ -62,5 +57,4 @@ public class BlogAdapter extends KJAdapter<Blog> {
             }
         });
     }
-
 }

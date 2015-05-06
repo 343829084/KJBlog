@@ -3,11 +3,12 @@ package org.kymjs.blog.domain;
 import java.io.Serializable;
 
 /**
- * 博客实体类
+ * 博客实体类，以后替换为KymJSBlog(先不删，留着)
  * 
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
+@Deprecated
 public class Blog implements Serializable {
     private static final long serialVersionUID = 1L;
 
