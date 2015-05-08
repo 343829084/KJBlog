@@ -159,16 +159,19 @@ public class OSCBlogDetailFragment extends TitleBarFragment {
      * @param data
      */
     private void fillUI(OSCBlogEntity data) {
-        this.data.setName(data.getBlog().getTitle());
-        mTvAuthor.setText(data.getBlog().getAuthorname());
-        mTvBlogTitle.setText(data.getBlog().getTitle());
-        mTvTime.setText(StringUtils.friendlyTime(data.getBlog().getPubDate()));
+        if (data.getBlog() != null) {
+            this.data.setName(data.getBlog().getTitle());
+            mTvAuthor.setText(data.getBlog().getAuthorname());
+            mTvBlogTitle.setText(data.getBlog().getTitle());
+            mTvTime.setText(StringUtils.friendlyTime(data.getBlog()
+                    .getPubDate()));
 
-        StringBuffer body = new StringBuffer();
-        body.append(UIHelper.setHtmlCotentSupportImagePreview(data.getBlog()
-                .getBody()));
-        body.append(UIHelper.WEB_STYLE).append(UIHelper.WEB_LOAD_IMAGES);
-        mWebView.loadDataWithBaseURL(null, body.toString(), "text/html",
-                "utf-8", null);
+            StringBuffer body = new StringBuffer();
+            body.append(UIHelper.setHtmlCotentSupportImagePreview(data
+                    .getBlog().getBody()));
+            body.append(UIHelper.WEB_STYLE).append(UIHelper.WEB_LOAD_IMAGES);
+            mWebView.loadDataWithBaseURL(null, body.toString(), "text/html",
+                    "utf-8", null);
+        }
     }
 }
