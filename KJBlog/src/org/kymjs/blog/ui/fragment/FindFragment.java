@@ -11,6 +11,7 @@ import org.kymjs.blog.ui.widget.KJScrollView.OnViewTopPull;
 import org.kymjs.blog.utils.UIHelper;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.utils.StringUtils;
 import org.kymjs.kjframe.widget.RoundImageView;
 
 import android.os.Bundle;
@@ -51,6 +52,8 @@ public class FindFragment extends TitleBarFragment {
     @BindView(id = R.id.find_plugin_6, click = true)
     private TextView mTvSticky;
 
+    KJBitmap kjb = new KJBitmap();
+
     @Override
     protected View inflaterView(LayoutInflater inflater, ViewGroup container,
             Bundle bundle) {
@@ -70,6 +73,11 @@ public class FindFragment extends TitleBarFragment {
         int h = params.height = (int) (AppContext.screenH * 0.3);
         params.width = AppContext.screenW;
         mImgZone.setLayoutParams(params);
+        kjb.displayLoadAndErrorBitmap(
+                mImgZone,
+                "http://www.kymjs.com/image/user_center_bg"
+                        + StringUtils.getDataTime("MMdd") + ".png",
+                R.drawable.user_center_bg, R.drawable.user_center_bg);
 
         int space65 = (int) getResources().getDimension(R.dimen.space_65);
 
@@ -131,9 +139,9 @@ public class FindFragment extends TitleBarFragment {
     @Override
     public void onResume() {
         super.onResume();
-        new KJBitmap().display(mImgHead, UIHelper.getUser(outsideAty)
-                .getPortrait(), R.drawable.default_head,
-                R.drawable.default_head);
+        new KJBitmap().displayLoadAndErrorBitmap(mImgHead,
+                UIHelper.getUser(outsideAty).getPortrait(),
+                R.drawable.default_head, R.drawable.default_head);
         mTvName.setText(UIHelper.getUser(outsideAty).getName());
     }
 }
