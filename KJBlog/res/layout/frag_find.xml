@@ -13,7 +13,7 @@
             android:id="@+id/find_img_zone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/main_maron_bg"
+            android:background="@drawable/user_center_bg"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY" />
 

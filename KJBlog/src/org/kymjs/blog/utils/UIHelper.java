@@ -193,7 +193,7 @@ public class UIHelper {
         } else {
             user = new User();
             user.setUid(2332925);
-            user.setPortrait("http://www.kymjs.com/assets/img/head_def.png");
+            user.setPortrait("http://www.kymjs.com/image/default_head.png");
             user.setName("爱看博客用户");
             user.setPwd("");
             user.setAccount("");

@@ -132,7 +132,8 @@ public class FindFragment extends TitleBarFragment {
     public void onResume() {
         super.onResume();
         new KJBitmap().display(mImgHead, UIHelper.getUser(outsideAty)
-                .getPortrait());
+                .getPortrait(), R.drawable.default_head,
+                R.drawable.default_head);
         mTvName.setText(UIHelper.getUser(outsideAty).getName());
     }
 }
