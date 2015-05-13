@@ -5,6 +5,7 @@ import java.util.List;
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.CollectAdapter;
 import org.kymjs.blog.domain.CollectData;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
@@ -25,6 +26,8 @@ public class MyCollectFragment extends TitleBarFragment {
 
     public static final String TAG = MyCollectFragment.class.getSimpleName();
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -45,6 +48,7 @@ public class MyCollectFragment extends TitleBarFragment {
     protected void initData() {
         super.initData();
         kjdb = KJDB.create(outsideAty);
+        mEmptyLayout.dismiss();
     }
 
     @Override

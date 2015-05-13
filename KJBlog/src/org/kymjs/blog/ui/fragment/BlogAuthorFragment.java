@@ -7,6 +7,7 @@ import org.kymjs.blog.adapter.BlogAuthorAdapter;
 import org.kymjs.blog.domain.BlogAuthor;
 import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
@@ -34,6 +35,8 @@ public class BlogAuthorFragment extends TitleBarFragment {
 
     public static final String AUTHOR_NAME_KEY = "author_name_key";
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -118,6 +121,8 @@ public class BlogAuthorFragment extends TitleBarFragment {
             } else {
                 adapter.refresh(datas);
             }
+        } else {
+            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
         }
         refresh();
     }
@@ -139,6 +144,13 @@ public class BlogAuthorFragment extends TitleBarFragment {
                         adapter.refresh(datas);
                     }
                 }
+                mEmptyLayout.dismiss();
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
             }
         });
     }

@@ -15,4 +15,8 @@
     <color name="swiperefresh_color4">#ffaa66cc</color>
 
     <color name="more_style_bg">#eafdfdfd</color>
+    
+    <color name="window_background">#EBEBEB</color>
+    <color name="main_gray">#9A9A9A</color>
+    
 </resources>

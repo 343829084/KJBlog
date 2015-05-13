@@ -4,6 +4,7 @@ import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.ActiveAdapter;
 import org.kymjs.blog.domain.ActiveList;
 import org.kymjs.blog.ui.Browser;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
@@ -37,6 +38,8 @@ public class ActiveFragment extends TitleBarFragment implements
 
     public static final String TAG = ActiveFragment.class.getSimpleName();
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -110,6 +113,8 @@ public class ActiveFragment extends TitleBarFragment implements
             } else {
                 adapter.refresh(dataRes.getEvents());
             }
+        } else {
+            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
         }
         refresh();
     }
@@ -131,6 +136,13 @@ public class ActiveFragment extends TitleBarFragment implements
                         adapter.refresh(dataRes.getEvents());
                     }
                 }
+                mEmptyLayout.dismiss();
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
             }
         });
     }

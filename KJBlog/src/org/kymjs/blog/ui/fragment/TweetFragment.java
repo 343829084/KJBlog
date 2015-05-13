@@ -11,6 +11,7 @@ import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.domain.Tweet;
 import org.kymjs.blog.domain.TweetsList;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
@@ -42,6 +43,8 @@ public class TweetFragment extends TitleBarFragment {
 
     public static final String TAG = TweetFragment.class.getSimpleName();
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -103,7 +106,7 @@ public class TweetFragment extends TitleBarFragment {
                 refresh();
             }
         });
-
+        mEmptyLayout.setVisibility(View.VISIBLE);
         fillUI();
     }
 
@@ -144,6 +147,13 @@ public class TweetFragment extends TitleBarFragment {
                 }
                 mRefreshLayout.onPullDownRefreshComplete();
                 mRefreshLayout.onPullUpRefreshComplete();
+                mEmptyLayout.dismiss();
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
             }
         });
     }

@@ -6,6 +6,7 @@ import org.kymjs.blog.domain.OSCBlog;
 import org.kymjs.blog.domain.OSCBlogList;
 import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.SimpleBackActivity;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
@@ -36,6 +37,8 @@ public class OSCBlogListFragment extends TitleBarFragment {
 
     public static final String TAG = OSCBlogListFragment.class.getSimpleName();
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.listview)
     private PullToRefreshList mRefreshLayout;
     private ListView mListView;
@@ -136,6 +139,8 @@ public class OSCBlogListFragment extends TitleBarFragment {
             } else {
                 adapter.refresh(dataRes.getBloglist());
             }
+        } else {
+            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
         }
         refresh();
     }
@@ -158,6 +163,13 @@ public class OSCBlogListFragment extends TitleBarFragment {
                         adapter.refresh(dataRes.getBloglist());
                     }
                 }
+                mEmptyLayout.dismiss();
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
             }
         });
     }

@@ -6,6 +6,7 @@ import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.BlogAdapter;
 import org.kymjs.blog.domain.Blog;
 import org.kymjs.blog.ui.Main;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
@@ -36,6 +37,8 @@ public class BlogFragment extends TitleBarFragment {
 
     public static final String TAG = BlogFragment.class.getSimpleName();
 
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
     @BindView(id = R.id.blog_swiperefreshlayout)
     private PullToRefreshList mRefreshLayout;
     private ListView mList;
@@ -120,6 +123,8 @@ public class BlogFragment extends TitleBarFragment {
             List<Blog> datas = Parser.getBlogList(cache);
             adapter = new BlogAdapter(mList, datas, R.layout.item_list_blog);
             mList.setAdapter(adapter);
+        } else {
+            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
         }
         refresh();
     }
@@ -141,6 +146,13 @@ public class BlogFragment extends TitleBarFragment {
                 }
                 mRefreshLayout.onPullDownRefreshComplete();
                 mRefreshLayout.onPullUpRefreshComplete();
+                mEmptyLayout.dismiss();
+            }
+
+            @Override
+            public void onFailure(int errorNo, String strMsg) {
+                super.onFailure(errorNo, strMsg);
+                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
             }
         });
     }
