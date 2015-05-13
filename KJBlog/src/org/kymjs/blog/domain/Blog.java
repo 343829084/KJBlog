@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
-@Deprecated
 public class Blog implements Serializable {
     private static final long serialVersionUID = 1L;
 
