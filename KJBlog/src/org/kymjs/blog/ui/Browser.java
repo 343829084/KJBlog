@@ -1,6 +1,7 @@
 package org.kymjs.blog.ui;
 
 import org.kymjs.blog.R;
+import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.kjframe.ui.BindView;
 import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -42,6 +43,8 @@ public class Browser extends TitleBarActivity {
     LinearLayout mLayoutBottom;
     @BindView(id = R.id.progress)
     ProgressBar mProgress;
+    @BindView(id = R.id.empty_layout)
+    private EmptyLayout mEmptyLayout;
 
     public static final String BROWSER_KEY = "browser_url";
     public static final String BROWSER_TITLE_KEY = "browser_title_url";
@@ -263,6 +266,7 @@ public class Browser extends TitleBarActivity {
         public void onProgressChanged(WebView view, int newProgress) { // 进度
             super.onProgressChanged(view, newProgress);
             if (newProgress > 60) {
+                mEmptyLayout.dismiss();
                 mProgress.setVisibility(View.GONE);
             }
         }

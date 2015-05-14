@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import org.kymjs.blog.domain.Blog;
 import org.kymjs.blog.domain.BlogAuthor;
 import org.kymjs.blog.domain.EverydayMessage;
+import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.SystemTool;
 
 import android.content.Context;
@@ -161,6 +162,7 @@ public class Parser {
             JSONObject obj = new JSONObject(json);
             int serverVersion = obj.optInt("version", 0);
             int currentVersion = SystemTool.getAppVersionCode(cxt);
+            KJLoger.debug("当前版本：" + currentVersion + "最新版本：" + serverVersion);
             if (serverVersion > currentVersion) {
                 url = obj.optString("url");
             }
