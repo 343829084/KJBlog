@@ -4,8 +4,8 @@
 
 #简介 
 爱看博客是我的个人博客平台客户端，你也可以访问[http://blog.kymjs.com](http://blog.kymjs.com)查看我的博客。<br>
-更多我的开源项目请查看开源实验室[http://www.kymjs.com](http://www.kymjs.com/);<br>
-APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://www.kymjs.com/app/kjblog.apk)<br>
+
+APK下载地址 *爱看博客*：[http://www.kymjs.com/app](http://www.kymjs.com/app)<br>
 
 同时也欢迎你关注我的微信公众号【Android技术分享】,我会每天发一篇技术博客供你学习。
 [![Android技术分享](http://blog.kymjs.com/images/qrcode.jpg)](http://blog.kymjs.com/)<br>
@@ -13,8 +13,6 @@ APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://ww
 ## 说明
 本项目所用到的开源框架：<br>
 * *KJFrameForAndroid* ：[https://github.com/kymjs/KJFrameForAndroid](https://github.com/kymjs/KJFrameForAndroid)<br>
-* *KJPush* ：[http://git.oschina.net/kymjs/KJPush](http://git.oschina.net/kymjs/KJPush)<br>
-* *NineOldAndroids* ：[https://github.com/JakeWharton/NineOldAndroids](https://github.com/JakeWharton/NineOldAndroids)<br>
 * *KJEmoji* ：[http://git.oschina.net/kymjs/KJEmoji](http://git.oschina.net/kymjs/KJEmoji)<br>
 
 启动Eclipse，点击菜单并导入Android客户端项目，请确保你当前的Android SDK是最新版。<br>
@@ -26,6 +24,9 @@ APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://ww
 ## 运行截图
 <a href="http://www.kymjs.com/"><img src="http://www.kymjs.com/image/kjblog/screenshot1.png" height="400" width="240" alt="开源实验室"/></a>
 <a href="http://www.kymjs.com/"><img src="http://www.kymjs.com/image/kjblog/screenshot2.png" height="400" width="240" alt="开源实验室"/></a>
+<a href="http://www.kymjs.com/"><img src="http://www.kymjs.com/image/kjblog/screenshot3.png" height="400" width="240" alt="开源实验室"/></a>
+<a href="http://www.kymjs.com/"><img src="http://www.kymjs.com/image/kjblog/screenshot4.png" height="400" width="240" alt="开源实验室"/></a>
+<a href="http://www.kymjs.com/"><img src="http://www.kymjs.com/image/kjblog/screenshot5.png" height="400" width="240" alt="开源实验室"/></a>
 
 ## 开源协议
   Copyright (c) 2015, 张涛.
@@ -44,7 +45,7 @@ APK下载地址 *爱看博客*：[http://www.kymjs.com/app/kjblog.apk](http://ww
 
 ## 关于我
 我的自我介绍：[张涛就是我](http://blog.kymjs.com/about)<br>
-如果我的项目帮到了你，可否在你有能力的基础捐助我买书学习，以让我更有信心和能力回馈网友。<br>
+如果我的项目帮到了你，可否在你有能力的基础捐助我的开源实验室，以让我更有信心和能力回馈网友。<br>
 [点这里参与捐助](https://shenghuo.alipay.com/send/payment/fill.htm) 我的支付宝账号[kymjs@foxmail.com](https://shenghuo.alipay.com/send/payment/fill.htm)<br>
 
-我们会将捐助者信息公布在[开源实验室](http://www.kymjs.com)首页，如果你有什么想说的话也可以留言给我。
+我们会将捐助者信息公布在[开源实验室](http://www.kymjs.com/donate)首页，如果你有什么想说的话也可以留言给我。

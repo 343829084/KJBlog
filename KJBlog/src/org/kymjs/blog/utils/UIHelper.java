@@ -188,6 +188,7 @@ public class UIHelper {
         }
         KJDB kjdb = KJDB.create(cxt);
         List<User> datas = kjdb.findAll(User.class);
+
         if (datas != null && datas.size() > 0) {
             user = datas.get(0);
         } else {

@@ -12,8 +12,9 @@ public class User {
     private String cookie;
 
     @Id
+    private int id; // 数据库id
     @XStreamAlias("uid")
-    private int uid;
+    private int uid; // OSC用户ID
     @XStreamAlias("name")
     private String name;
     @XStreamAlias("portrait")
@@ -31,6 +32,14 @@ public class User {
     private String favoritecount;
     @XStreamAlias("gender")
     private String gender;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getAccount() {
         return account;
