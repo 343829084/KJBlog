@@ -123,8 +123,7 @@ public class BlogFragment extends TitleBarFragment {
             List<Blog> datas = Parser.getBlogList(cache);
             adapter = new BlogAdapter(mList, datas, R.layout.item_list_blog);
             mList.setAdapter(adapter);
-        } else {
-            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
+            mEmptyLayout.dismiss();
         }
         refresh();
     }

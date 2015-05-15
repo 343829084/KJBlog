@@ -106,7 +106,6 @@ public class TweetFragment extends TitleBarFragment {
                 refresh();
             }
         });
-        mEmptyLayout.setVisibility(View.VISIBLE);
         fillUI();
     }
 

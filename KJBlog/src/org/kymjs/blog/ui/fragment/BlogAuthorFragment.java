@@ -121,8 +121,7 @@ public class BlogAuthorFragment extends TitleBarFragment {
             } else {
                 adapter.refresh(datas);
             }
-        } else {
-            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
+            mEmptyLayout.dismiss();
         }
         refresh();
     }

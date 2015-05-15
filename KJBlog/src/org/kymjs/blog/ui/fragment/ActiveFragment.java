@@ -113,8 +113,7 @@ public class ActiveFragment extends TitleBarFragment implements
             } else {
                 adapter.refresh(dataRes.getEvents());
             }
-        } else {
-            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
+            mEmptyLayout.dismiss();
         }
         refresh();
     }

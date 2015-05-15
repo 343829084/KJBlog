@@ -139,8 +139,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
             } else {
                 adapter.refresh(dataRes.getBloglist());
             }
-        } else {
-            mEmptyLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
+            mEmptyLayout.dismiss();
         }
         refresh();
     }
