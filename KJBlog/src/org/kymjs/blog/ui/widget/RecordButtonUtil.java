@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.R;
+import org.kymjs.kjframe.ui.KJActivityStack;
 import org.kymjs.kjframe.ui.ViewInject;
 import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.StringUtils;
@@ -144,8 +145,8 @@ public class RecordButtonUtil {
                     e.printStackTrace();
                 }
             } else {
-                ViewInject.toast(timeView.getResources().getString(
-                        R.string.record_sound_notfound));
+                ViewInject.toast(KJActivityStack.create().topActivity()
+                        .getString(R.string.record_sound_notfound));
             }
         } else {
             stopPlay();
