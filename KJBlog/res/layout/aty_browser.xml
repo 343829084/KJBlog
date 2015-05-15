@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
@@ -15,7 +15,12 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true" />
-    
+
+    <org.kymjs.blog.ui.widget.EmptyLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <include
         android:id="@+id/titlebar"
         layout="@layout/main_titlebar" />
@@ -62,10 +67,5 @@
             android:padding="10dp"
             android:src="@drawable/iconfont_wangluo" />
     </LinearLayout>
-    
-    <org.kymjs.blog.ui.widget.EmptyLayout
-        android:id="@+id/empty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </RelativeLayout>
