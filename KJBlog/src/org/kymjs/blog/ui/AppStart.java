@@ -47,15 +47,7 @@ public class AppStart extends KJActivity {
     /**
      * 根据设置启动推送进程
      */
-    private void configPush() {
-        // boolean isOpen = PreferenceHelper.readBoolean(aty,
-        // AppConfig.PUSH_SWITCH_FILE, AppConfig.PUSH_SWITCH_KEY, true);
-        // if (isOpen) {
-        // KJPushManager.create().startWork(aty, PushReceiver.class);
-        // } else {
-        // KJPushManager.create().stopWork();
-        // }
-    }
+    private void configPush() {}
 
     private void jumpTo() {
         startService(new Intent(aty, CommonService.class));

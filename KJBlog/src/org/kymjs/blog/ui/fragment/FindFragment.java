@@ -75,7 +75,7 @@ public class FindFragment extends TitleBarFragment {
         mImgZone.setLayoutParams(params);
         kjb.displayLoadAndErrorBitmap(
                 mImgZone,
-                "http://www.kymjs.com/image/user_center_bg"
+                "http://www.kymjs.com/app/user_center_bg"
                         + StringUtils.getDataTime("MMdd") + ".png",
                 R.drawable.user_center_bg, R.drawable.user_center_bg);
 

@@ -13,6 +13,6 @@
 
     <alpha
         android:fromAlpha="1.0"
-        android:toAlpha="0.9" />
+        android:toAlpha="0.8" />
 
 </set>

@@ -8,7 +8,6 @@ import org.kymjs.blog.utils.KJAnimations;
 import org.kymjs.blog.utils.PullTip;
 import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.ui.KJActivityStack;
-import org.kymjs.kjframe.ui.ViewInject;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -48,7 +47,6 @@ public abstract class TitleBarActivity extends KJActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         if (!"org.kymjs.blog".equals(getApplication().getPackageName())) {
-            ViewInject.toast("非法启动");
             KJActivityStack.create().AppExit(aty);
         }
     }
