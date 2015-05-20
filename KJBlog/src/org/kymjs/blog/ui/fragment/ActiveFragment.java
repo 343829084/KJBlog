@@ -22,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -76,6 +77,13 @@ public class ActiveFragment extends TitleBarFragment implements
     @Override
     protected void initWidget(View parentView) {
         super.initWidget(parentView);
+        mEmptyLayout.setOnLayoutClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                refresh();
+            }
+        });
+
         mListView = mRefreshLayout.getRefreshView();
         mListView.setDivider(new ColorDrawable(android.R.color.transparent));
         mListView.setSelector(new ColorDrawable(android.R.color.transparent));
