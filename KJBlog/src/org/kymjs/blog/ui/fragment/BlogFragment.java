@@ -16,6 +16,7 @@ import org.kymjs.kjframe.KJHttp;
 import org.kymjs.kjframe.http.HttpCallBack;
 import org.kymjs.kjframe.http.HttpConfig;
 import org.kymjs.kjframe.ui.BindView;
+import org.kymjs.kjframe.utils.KJLoger;
 import org.kymjs.kjframe.utils.StringUtils;
 
 import android.graphics.drawable.ColorDrawable;
@@ -133,25 +134,31 @@ public class BlogFragment extends TitleBarFragment {
             @Override
             public void onSuccess(String t) {
                 super.onSuccess(t);
+                KJLoger.debug("博客列表：" + t);
                 if (t != null) {
                     List<Blog> datas = Parser.getBlogList(t);
-                    if (adapter == null) {
-                        adapter = new BlogAdapter(mList, datas,
-                                R.layout.item_list_blog);
-                        mList.setAdapter(adapter);
-                    } else {
-                        adapter.refresh(datas);
-                    }
+                    adapter = new BlogAdapter(mList, datas,
+                            R.layout.item_list_blog);
+                    mList.setAdapter(adapter);
                 }
-                mRefreshLayout.onPullDownRefreshComplete();
-                mRefreshLayout.onPullUpRefreshComplete();
                 mEmptyLayout.dismiss();
             }
 
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 super.onFailure(errorNo, strMsg);
-                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                if (adapter != null && adapter.getCount() > 0) {
+                    return;
+                } else {
+                    mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                mRefreshLayout.onPullDownRefreshComplete();
+                mRefreshLayout.onPullUpRefreshComplete();
             }
         });
     }

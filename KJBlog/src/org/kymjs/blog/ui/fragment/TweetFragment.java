@@ -128,7 +128,7 @@ public class TweetFragment extends TitleBarFragment {
         refresh((int) page);
     }
 
-    private void refresh(int page) {
+    private void refresh(final int page) {
         kjh.get(OSCTWEET_HOST + page, new HttpCallBack() {
             @Override
             public void onSuccess(String t) {
@@ -144,15 +144,24 @@ public class TweetFragment extends TitleBarFragment {
                 } else {
                     adapter.refresh(tweets);
                 }
-                mRefreshLayout.onPullDownRefreshComplete();
-                mRefreshLayout.onPullUpRefreshComplete();
                 mEmptyLayout.dismiss();
             }
 
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 super.onFailure(errorNo, strMsg);
-                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                if (adapter != null && adapter.getCount() > 0) {
+                    return;
+                } else {
+                    mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                mRefreshLayout.onPullDownRefreshComplete();
+                mRefreshLayout.onPullUpRefreshComplete();
             }
         });
     }

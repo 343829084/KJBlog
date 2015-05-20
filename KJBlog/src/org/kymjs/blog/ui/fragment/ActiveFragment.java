@@ -124,7 +124,6 @@ public class ActiveFragment extends TitleBarFragment implements
             public void onSuccess(String t) {
                 super.onSuccess(t);
                 KJLoger.debug(TAG + "网络请求：" + t);
-                mRefreshLayout.onPullDownRefreshComplete();
                 if (t != null && !t.equals(cache)) {
                     ActiveList dataRes = Parser.xmlToBean(ActiveList.class, t);
                     if (adapter == null) {
@@ -141,7 +140,17 @@ public class ActiveFragment extends TitleBarFragment implements
             @Override
             public void onFailure(int errorNo, String strMsg) {
                 super.onFailure(errorNo, strMsg);
-                mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                if (adapter != null && adapter.getCount() > 0) {
+                    return;
+                } else {
+                    mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                mRefreshLayout.onPullDownRefreshComplete();
             }
         });
     }
