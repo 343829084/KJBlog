@@ -97,6 +97,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
         mEmptyLayout.setOnLayoutClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                mEmptyLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
                 refresh();
             }
         });
