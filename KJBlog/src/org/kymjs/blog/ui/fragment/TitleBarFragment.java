@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2015, 张涛.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.kymjs.blog.ui.fragment;
 
 import org.kymjs.blog.AppContext;
@@ -8,17 +23,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 /**
+ * 
  * 具有ActionBar的Activity的基类
  * 
- * @author kymjs (https://github.com/kymjs)
- * @since 2015-3
+ * @author kymjs (http://www.kymjs.com/)
+ * 
  */
 public abstract class TitleBarFragment extends KJFragment {
 
     /**
      * 封装一下方便一起返回(JAVA没有结构体这么一种东西实在是个遗憾)
      * 
-     * @author kymjs (https://github.com/kymjs)
+     * @author kymjs (http://www.kymjs.com/)
      */
     public class ActionBarRes {
         public CharSequence title;

@@ -1,10 +1,25 @@
+/*
+ * Copyright (c) 2015, 张涛.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.kymjs.blog.receiver;
 
 /**
  * 使用KJPush(http://git.oschina.net/kymjs/KJPush)项目，获取推送信息的广播，
  * 其中屏幕开关与网络改变的广播仅在应用未退出时有效
  * 
- * @author kymjs (http://github.com/kymjs)
+ * @author kymjs (http://www.kymjs.com/)
  * 
  */
 public class KJPushReceiver {

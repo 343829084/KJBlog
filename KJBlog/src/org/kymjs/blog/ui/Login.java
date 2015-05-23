@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2015, 张涛.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.kymjs.blog.ui;
 
 import org.kymjs.blog.R;
@@ -32,7 +47,7 @@ import android.widget.RelativeLayout;
  * @点击登陆 传递账号、密码、IMEI；
  * @第三方登陆 传递ID,token，IMEI，若返回201，表示未登陆过，跳转到注册界面
  * @注册 跳转到注册页面
- * @author zhangtao
+ * @author kymjs (http://www.kymjs.com/)
  */
 public class Login extends KJActivity {
 

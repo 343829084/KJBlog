@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2015, 张涛.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.kymjs.blog.ui.widget.listview;
 
 import org.kymjs.blog.ui.widget.listview.ILoadingLayout.State;
@@ -11,14 +26,13 @@ import android.widget.Adapter;
 import android.widget.ListView;
 
 /**
- * @see {@link #PullToRefreshListView} 
- * 这个类实现了ListView下拉刷新，上加载更多和滑到底部自动加载
+ * @see {@link #PullToRefreshListView} 这个类实现了ListView下拉刷新，上加载更多和滑到底部自动加载
  * 
  * @author kymjs (https://github.com/kymjs)
  * @since 2015-3
  */
-public class PullToRefreshList extends
-        PullToRefreshBase<ListView> implements OnScrollListener {
+public class PullToRefreshList extends PullToRefreshBase<ListView> implements
+        OnScrollListener {
 
     private ListView mfakeListView; // 一个伪造的ListView(实际上是包含了一个ListView)
     private LoadingLayout mLoadMoreFooterLayout; // 用于滑到底部自动加载的Footer
@@ -32,16 +46,14 @@ public class PullToRefreshList extends
         this(context, attrs, 0);
     }
 
-    public PullToRefreshList(Context context, AttributeSet attrs,
-            int defStyle) {
+    public PullToRefreshList(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setPullLoadEnabled(false);
     }
 
     @Override
-    protected ListView createRefreshView(Context context,
-            AttributeSet attrs) {
-    	ListView listView = new ListView(context);
+    protected ListView createRefreshView(Context context, AttributeSet attrs) {
+        ListView listView = new ListView(context);
         mfakeListView = listView;
         listView.setOnScrollListener(this);
         return listView;
@@ -187,8 +199,8 @@ public class PullToRefreshList extends
             return true;
         }
 
-        int mostTop = (mfakeListView.getChildCount() > 0) ? mfakeListView.getChildAt(0)
-                .getTop() : mfakeListView.getTop();
+        int mostTop = (mfakeListView.getChildCount() > 0) ? mfakeListView
+                .getChildAt(0).getTop() : mfakeListView.getTop();
         if (mostTop >= 0) {
             return true;
         }

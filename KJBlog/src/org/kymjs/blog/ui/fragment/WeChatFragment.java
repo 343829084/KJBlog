@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2015, 张涛.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package org.kymjs.blog.ui.fragment;
 
 import java.util.List;
@@ -28,7 +43,7 @@ import android.widget.ListView;
  * 可是博客内并没有提供项目介绍的sample,于是根据博客中QQ信息发送了好友请求:你好，刚看了你的博客，麻烦你能发一份Demo给我吗。结果被拒绝了。。。<br>
  * 诶，还是自己写吧,于是才有了这个界面
  * 
- * @author kymjs (https://github.com/kymjs)
+ * @author kymjs (http://www.kymjs.com/)
  * @since 2015-3
  */
 public class WeChatFragment extends TitleBarFragment {
