@@ -88,7 +88,7 @@ public class BlogAuthorFragment extends TitleBarFragment {
     protected void initData() {
         super.initData();
         HttpConfig config = new HttpConfig();
-        config.cacheTime = 300;
+        config.cacheTime = 30;
         config.useDelayCache = true;
         kjh = new KJHttp(config);
     }

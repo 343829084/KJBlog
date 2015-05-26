@@ -23,6 +23,7 @@ import java.io.IOException;
 
 import org.kymjs.blog.AppConfig;
 import org.kymjs.blog.CrashHandler;
+import org.kymjs.blog.utils.MD5;
 import org.kymjs.blog.utils.MailSenderInfo;
 import org.kymjs.blog.utils.Parser;
 import org.kymjs.blog.utils.SimpleMailSender;
@@ -36,9 +37,11 @@ import org.kymjs.kjframe.utils.StringUtils;
 import org.kymjs.kjframe.utils.SystemTool;
 
 import android.app.IntentService;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 /**
  * 做一些全局的信息处理，检查更新，日志上传
@@ -137,23 +140,37 @@ public class CommonService extends IntentService {
     }
 
     private void uploadCrashLog(String info) {
-        try {
-            MailSenderInfo mailInfo = new MailSenderInfo();
-            mailInfo.setMailServerHost("smtp.qq.com");
-            mailInfo.setMailServerPort("25");
-            mailInfo.setValidate(true);
-            mailInfo.setUserName("1182954373@qq.com");
-            mailInfo.setPassword("kjblog123");
-            mailInfo.setFromAddress("1182954373@qq.com");
-            mailInfo.setToAddress("766136833@qq.com");
-            mailInfo.setSubject("错误日志");
-            mailInfo.setContent(info);
+        if ("96ee32139bbefde1033340fdf346f81f".equals(getSign(this,
+                "org.kymjs.blog"))) {
+            try {
+                MailSenderInfo mailInfo = new MailSenderInfo();
+                mailInfo.setMailServerHost("smtp.qq.com");
+                mailInfo.setMailServerPort("25");
+                mailInfo.setValidate(true);
+                mailInfo.setUserName("1182954373@qq.com");
+                mailInfo.setPassword("kymjs123");
+                mailInfo.setFromAddress("1182954373@qq.com");
+                mailInfo.setToAddress("766136833@qq.com");
+                mailInfo.setSubject("错误日志");
+                mailInfo.setContent(info);
 
-            // 这个类主要来发送邮件
-            SimpleMailSender sms = new SimpleMailSender();
-            sms.sendTextMail(mailInfo);// 发送文体格式
-            // sms.sendHtmlMail(mailInfo);//发送html格式
-        } catch (Exception e) {
+                // 这个类主要来发送邮件
+                SimpleMailSender sms = new SimpleMailSender();
+                sms.sendTextMail(mailInfo);// 发送文体格式
+                // sms.sendHtmlMail(mailInfo);//发送html格式
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public static String getSign(Context context, String pkgName) {
+        try {
+            PackageInfo pis = context.getPackageManager().getPackageInfo(
+                    pkgName, PackageManager.GET_SIGNATURES);
+            return MD5.hexdigest(pis.signatures[0].toByteArray());
+        } catch (NameNotFoundException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }
