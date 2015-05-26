@@ -26,7 +26,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
  */
 @SuppressWarnings("serial")
 @XStreamAlias("blog")
-public class OSCBlog implements Serializable {
+public class OSCBlog implements Serializable, Comparable<OSCBlog> {
 
     @XStreamAlias("id")
     private int id;
@@ -147,6 +147,20 @@ public class OSCBlog implements Serializable {
 
     public void setFavorite(int favorite) {
         this.favorite = favorite;
+    }
+
+    @Override
+    public int compareTo(OSCBlog another) {
+        return another.id - this.id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof OSCBlog) {
+            return ((OSCBlog) o).id == this.id;
+        } else {
+            return false;
+        }
     }
 
 }

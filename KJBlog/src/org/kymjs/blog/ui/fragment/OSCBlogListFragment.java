@@ -15,6 +15,9 @@
  */
 package org.kymjs.blog.ui.fragment;
 
+import java.util.Set;
+import java.util.TreeSet;
+
 import org.kymjs.blog.R;
 import org.kymjs.blog.adapter.OSCBlogAdapter;
 import org.kymjs.blog.domain.OSCBlog;
@@ -23,6 +26,7 @@ import org.kymjs.blog.domain.SimpleBackPage;
 import org.kymjs.blog.ui.SimpleBackActivity;
 import org.kymjs.blog.ui.widget.EmptyLayout;
 import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
+import org.kymjs.blog.ui.widget.listview.ILoadingLayout.State;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
@@ -62,10 +66,11 @@ public class OSCBlogListFragment extends TitleBarFragment {
     private ListView mListView;
 
     private OSCBlogAdapter adapter;
-
+    private final Set<OSCBlog> mDatas = new TreeSet<OSCBlog>();
     private KJHttp kjh;
 
     private final String OSCBLOG_HOST = "http://www.oschina.net/action/api/userblog_list?authoruid=";
+    private final String OSCBLOG_INDEX = "&pageSize=20&pageIndex=";
     private int BLOGLIST_ID = 1428332;
     private String cache;
     private SimpleBackActivity aty;
@@ -135,7 +140,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
         });
         mRefreshLayout.setPullLoadEnabled(true);
         ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
-                .setNoMoreDataText("太旧的文章就不要看了吧~");
+                .setNoMoreDataText("已经没有更多了~");
         mRefreshLayout.setOnRefreshListener(new OnRefreshListener<ListView>() {
             @Override
             public void onPullDownToRefresh(
@@ -146,7 +151,7 @@ public class OSCBlogListFragment extends TitleBarFragment {
             @Override
             public void onPullUpToRefresh(
                     PullToRefreshBase<ListView> refreshView) {
-                mRefreshLayout.setHasMoreData(false);
+                refresh(mDatas.size() / 20);
             }
         });
 
@@ -157,12 +162,13 @@ public class OSCBlogListFragment extends TitleBarFragment {
         cache = kjh.getStringCache(OSCBLOG_HOST + BLOGLIST_ID);
         if (!StringUtils.isEmpty(cache)) {
             OSCBlogList dataRes = Parser.xmlToBean(OSCBlogList.class, cache);
+            mDatas.addAll(dataRes.getBloglist());
             if (adapter == null) {
-                adapter = new OSCBlogAdapter(mListView, dataRes.getBloglist(),
+                adapter = new OSCBlogAdapter(mListView, mDatas,
                         R.layout.item_list_blog);
                 mListView.setAdapter(adapter);
             } else {
-                adapter.refresh(dataRes.getBloglist());
+                adapter.refresh(mDatas);
             }
             mEmptyLayout.dismiss();
         }
@@ -170,41 +176,56 @@ public class OSCBlogListFragment extends TitleBarFragment {
     }
 
     private void refresh() {
-        kjh.get(OSCBLOG_HOST + BLOGLIST_ID, new HttpCallBack() {
-            @Override
-            public void onSuccess(String t) {
-                super.onSuccess(t);
-                KJLoger.debug(TAG + "网络请求：" + t);
-                if (t != null && !t.equals(cache)) {
-                    OSCBlogList dataRes = Parser
-                            .xmlToBean(OSCBlogList.class, t);
-                    if (adapter == null) {
-                        adapter = new OSCBlogAdapter(mListView, dataRes
-                                .getBloglist(), R.layout.item_list_blog);
-                        mListView.setAdapter(adapter);
-                    } else {
-                        adapter.refresh(dataRes.getBloglist());
+        refresh(0);
+    }
+
+    private void refresh(int index) {
+        kjh.get(OSCBLOG_HOST + BLOGLIST_ID + OSCBLOG_INDEX + index,
+                new HttpCallBack() {
+                    @Override
+                    public void onSuccess(String t) {
+                        super.onSuccess(t);
+                        KJLoger.debug(TAG + "网络请求：" + t);
+                        if (t != null && !t.equals(cache)) {
+                            OSCBlogList dataRes = Parser.xmlToBean(
+                                    OSCBlogList.class, t);
+                            int prevCount = mDatas.size();
+                            mDatas.addAll(dataRes.getBloglist());
+                            // 是否还有下一页
+                            if (prevCount == mDatas.size()) {
+                                mRefreshLayout.setHasMoreData(false);
+                            }
+
+                            if (adapter == null) {
+                                adapter = new OSCBlogAdapter(mListView, mDatas,
+                                        R.layout.item_list_blog);
+                                mListView.setAdapter(adapter);
+                            } else {
+                                adapter.refresh(mDatas);
+                            }
+                        }
+                        mEmptyLayout.dismiss();
                     }
-                }
-                mEmptyLayout.dismiss();
-            }
 
-            @Override
-            public void onFailure(int errorNo, String strMsg) {
-                super.onFailure(errorNo, strMsg);
-                if (adapter != null && adapter.getCount() > 0) {
-                    return;
-                } else {
-                    mEmptyLayout.setErrorType(EmptyLayout.NODATA);
-                }
-            }
+                    @Override
+                    public void onFailure(int errorNo, String strMsg) {
+                        super.onFailure(errorNo, strMsg);
+                        if (adapter != null && adapter.getCount() > 0) {
+                            return;
+                        } else {
+                            mEmptyLayout.setErrorType(EmptyLayout.NODATA);
+                        }
+                    }
 
-            @Override
-            public void onFinish() {
-                super.onFinish();
-                mRefreshLayout.onPullDownRefreshComplete();
-            }
-        });
+                    @Override
+                    public void onFinish() {
+                        super.onFinish();
+                        mRefreshLayout.onPullDownRefreshComplete();
+                        if (mRefreshLayout.getFooterLoadingLayout().getState() != State.NO_MORE_DATA) {
+                            mRefreshLayout.onPullUpRefreshComplete();
+                        }
+                    }
+                });
     }
 
     /**

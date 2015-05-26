@@ -15,7 +15,7 @@
  */
 package org.kymjs.blog.adapter;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.kymjs.blog.R;
 import org.kymjs.blog.domain.OSCBlog;
@@ -37,7 +37,7 @@ import android.widget.TextView;
  */
 public class OSCBlogAdapter extends KJAdapter<OSCBlog> {
 
-    public OSCBlogAdapter(AbsListView view, List<OSCBlog> mDatas,
+    public OSCBlogAdapter(AbsListView view, Collection<OSCBlog> mDatas,
             int itemLayoutId) {
         super(view, mDatas, itemLayoutId);
     }
