@@ -22,6 +22,7 @@ import org.kymjs.blog.adapter.BlogAdapter;
 import org.kymjs.blog.domain.Blog;
 import org.kymjs.blog.ui.Main;
 import org.kymjs.blog.ui.widget.EmptyLayout;
+import org.kymjs.blog.ui.widget.listview.FooterLoadingLayout;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshBase.OnRefreshListener;
 import org.kymjs.blog.ui.widget.listview.PullToRefreshList;
@@ -118,6 +119,8 @@ public class BlogFragment extends TitleBarFragment {
         mList.setOverscrollHeader(null);
         mList.setOverScrollMode(ListView.OVER_SCROLL_NEVER);
         mRefreshLayout.setPullLoadEnabled(true);
+        ((FooterLoadingLayout) mRefreshLayout.getFooterLoadingLayout())
+                .setNoMoreDataText("学习不可贪多哦~");
 
         mList.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -137,7 +140,7 @@ public class BlogFragment extends TitleBarFragment {
             @Override
             public void onPullUpToRefresh(
                     PullToRefreshBase<ListView> refreshView) {
-                refresh();
+                mRefreshLayout.setHasMoreData(false);
             }
         });
     }
