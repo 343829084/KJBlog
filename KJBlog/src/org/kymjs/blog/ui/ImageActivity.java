@@ -19,8 +19,8 @@ import org.kymjs.kjframe.KJActivity;
 import org.kymjs.kjframe.KJBitmap;
 import org.kymjs.kjframe.bitmap.BitmapCallBack;
 import org.kymjs.kjframe.ui.BindView;
-import org.kymjs.kjframe.widget.ScaleImageView;
 
+import uk.co.senab.photoview.PhotoView;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -37,7 +37,7 @@ public class ImageActivity extends KJActivity {
     @BindView(id = R.id.progress)
     private ProgressBar mProgressBar;
     @BindView(id = R.id.images)
-    private ScaleImageView mImg;
+    private PhotoView mImg;
 
     private String url;
     private KJBitmap kjb;
