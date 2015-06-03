@@ -149,7 +149,7 @@ public class BlogFragment extends TitleBarFragment {
         cache = kjh.getStringCache(MY_BLOG_HOST);
         if (!StringUtils.isEmpty(cache)) {
             List<Blog> datas = Parser.getBlogList(cache);
-            adapter = new BlogAdapter(mList, datas, R.layout.item_list_blog);
+            adapter = new BlogAdapter(mList, datas);
             mList.setAdapter(adapter);
             mEmptyLayout.dismiss();
         }
@@ -164,8 +164,7 @@ public class BlogFragment extends TitleBarFragment {
                 KJLoger.debug("博客列表：" + t);
                 if (t != null) {
                     List<Blog> datas = Parser.getBlogList(t);
-                    adapter = new BlogAdapter(mList, datas,
-                            R.layout.item_list_blog);
+                    adapter = new BlogAdapter(mList, datas);
                     mList.setAdapter(adapter);
                 }
                 mEmptyLayout.dismiss();

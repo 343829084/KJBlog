@@ -39,8 +39,8 @@ import android.widget.ImageView;
 public class BlogAdapter extends KJAdapter<Blog> {
     private final KJBitmap kjb = new KJBitmap();
 
-    public BlogAdapter(AbsListView view, List<Blog> mDatas, int itemLayoutId) {
-        super(view, mDatas, itemLayoutId);
+    public BlogAdapter(AbsListView view, List<Blog> mDatas) {
+        super(view, mDatas, R.layout.item_list_blog);
     }
 
     @Override
