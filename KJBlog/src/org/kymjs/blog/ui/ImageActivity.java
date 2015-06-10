@@ -21,6 +21,7 @@ import org.kymjs.kjframe.bitmap.BitmapCallBack;
 import org.kymjs.kjframe.ui.BindView;
 
 import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -68,6 +69,12 @@ public class ImageActivity extends KJActivity {
             public void onFinish() {
                 super.onFinish();
                 mProgressBar.setVisibility(View.GONE);
+            }
+        });
+        mImg.setOnFinishListener(new PhotoViewAttacher.OnPhotoTapListener() {
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                ImageActivity.this.finish();
             }
         });
     }
