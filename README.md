@@ -1,5 +1,5 @@
 
- [![OSL](http://www.kymjs.com/image/logo_s.png)](http://www.kymjs.com/)<br>
+ [![OSL](http://www.kymjs.com/image/logo_s.png)](http://www.kymjs.com/works/)<br>
 # 爱看博客Android客户端
 
 #简介 
@@ -48,4 +48,4 @@ APK下载地址 *爱看博客*：[http://www.kymjs.com/app](http://www.kymjs.com
 如果我的项目帮到了你，可否在你有能力的基础捐助我的开源实验室，以让我更有信心和能力回馈网友。<br>
 [点这里参与捐助](https://shenghuo.alipay.com/send/payment/fill.htm) 我的支付宝账号[kymjs@foxmail.com](https://shenghuo.alipay.com/send/payment/fill.htm)<br>
 
-我们会将捐助者信息公布在[开源实验室](http://www.kymjs.com/donate)首页，如果你有什么想说的话也可以留言给我。
+我们会将捐助者信息公布在[开源实验室·捐赠](http://www.kymjs.com/donate)首页，如果你有什么想说的话也可以留言给我。
