@@ -67,7 +67,8 @@ public class CommonService extends IntentService {
             PackageManager pm = getPackageManager();
             PackageInfo info = pm.getPackageArchiveInfo(file.getAbsolutePath(),
                     PackageManager.GET_ACTIVITIES);
-            if (info.versionCode <= SystemTool.getAppVersionCode(this)) {
+            if (info != null
+                    && info.versionCode <= SystemTool.getAppVersionCode(this)) {
                 file.delete();
             }
         }

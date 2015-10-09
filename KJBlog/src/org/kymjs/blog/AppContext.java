@@ -15,7 +15,6 @@
  */
 package org.kymjs.blog;
 
-import org.kymjs.kjframe.bitmap.BitmapConfig;
 import org.kymjs.kjframe.http.HttpConfig;
 
 import android.app.Application;
@@ -26,13 +25,14 @@ import android.app.Application;
  * @since 2015-3
  */
 public class AppContext extends Application {
+    // 2015.10.9添加：注意Application类中不应该保存数据，当app出于后台的时候很容易被回收，这个时候再次启动app时，Application里面的值是为空的
+    // 这里我就不改了，大家知道就好
     public static int screenW;
     public static int screenH;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        BitmapConfig.CACHEPATH = AppConfig.imgCachePath;
         HttpConfig.CACHEPATH = AppConfig.httpCachePath;
         CrashHandler.create(this);
     }
